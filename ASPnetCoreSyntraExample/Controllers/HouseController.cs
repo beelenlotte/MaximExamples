@@ -24,35 +24,42 @@ namespace ASPnetCoreSyntraExample.Controllers
             }
         }
         [HttpGet("many")]
-        public List<House> GetAllHouses()
+        public ActionResult<List<House>> GetAllHouses()
         {
-            return houses;
+            return Ok(houses);
         }
         [HttpGet("one")]
         public ActionResult<House> GetHouse(string houseName)
         {
-            var house = houses.First(x => x.Name == houseName);
+            var house = houses.FirstOrDefault(x => x.Name == houseName);
+            if (house == null)
+            {
+                return NotFound();
+
+            }
             return Ok(house);
         }
         [HttpPost]
-        public void CreateNewHouse(House newHouse)
+        public ActionResult CreateNewHouse(House newHouse)
         {
             houses.Add(newHouse);
+            return Ok();
         }
         [HttpDelete]
-        public void DeleteHouse(string houseName)
+        public ActionResult DeleteHouse(string houseName)
         {
             var houseToDelete = houses.First(x => x.Name == houseName);
             houses.Remove(houseToDelete);
+            return Ok();
         }
 
         [HttpPut]
-        public House UpdateHouseByName(string nameOfHouseToEdit, House houseEditValues)
+        public ActionResult<House> UpdateHouseByName(string nameOfHouseToEdit, House houseEditValues)
         {
             var houseToEdit = houses.First(x => x.Name == nameOfHouseToEdit);
             houseToEdit.Price = houseEditValues.Price;
             houseToEdit.Area = houseEditValues.Area;
-            return houseToEdit;
+            return Ok(houseToEdit);
 
 
         }
@@ -60,8 +67,8 @@ namespace ASPnetCoreSyntraExample.Controllers
     }
     public class House
     {
-        public int Price { get; set; }
         public string Name { get; set; }
         public string Area { get; set; }
+        public int Price { get; set; }
     }
 }
