@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using ASPnetCoreSyntraExample.Models;
+using ASPnetCoreSyntraExample.Services;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -11,27 +13,21 @@ namespace ASPnetCoreSyntraExample.Controllers
     [ApiController]
     public class HouseController : ControllerBase
     {
-        static List<House> houses = new List<House>();
-        public HouseController()
+        private readonly IHouseService _houseService;
+        public HouseController(IHouseService houseService)
         {
-            if (houses.Count == 0)
-            {
-                var house1 = new House();
-                house1.Name = "H1";
-                house1.Area = "100m2";
-                house1.Price = 100000;
-                houses.Add(house1);
-            }
+            _houseService = houseService;
         }
         [HttpGet("many")]
         public ActionResult<List<House>> GetAllHouses()
         {
+            var houses = _houseService.GetHouses();
             return Ok(houses);
         }
         [HttpGet("one")]
         public ActionResult<House> GetHouse(string houseName)
         {
-            var house = houses.FirstOrDefault(x => x.Name == houseName);
+            var house = _houseService.GetHouse(houseName);
             if (house == null)
             {
                 return NotFound();
@@ -42,33 +38,36 @@ namespace ASPnetCoreSyntraExample.Controllers
         [HttpPost]
         public ActionResult CreateNewHouse(House newHouse)
         {
-            houses.Add(newHouse);
+            _houseService.AddHouse(newHouse);
             return Ok();
         }
-        [HttpDelete]
-        public ActionResult DeleteHouse(string houseName)
-        {
-            var houseToDelete = houses.First(x => x.Name == houseName);
-            houses.Remove(houseToDelete);
-            return Ok();
-        }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        //[HttpDelete]
+        //public ActionResult DeleteHouse(string houseName)
+        //{
+        //    var houseToDelete = houses.First(x => x.Name == houseName);
+        //    houses.Remove(houseToDelete);
+        //    return Ok();
+        //}
 
-        [HttpPut]
-        public ActionResult<House> UpdateHouseByName(string nameOfHouseToEdit, House houseEditValues)
-        {
-            var houseToEdit = houses.First(x => x.Name == nameOfHouseToEdit);
-            houseToEdit.Price = houseEditValues.Price;
-            houseToEdit.Area = houseEditValues.Area;
-            return Ok(houseToEdit);
+        //[HttpPut]
+        //public ActionResult<House> UpdateHouseByName(string nameOfHouseToEdit, House houseEditValues)
+        //{
+        //    var houseToEdit = houses.First(x => x.Name == nameOfHouseToEdit);
+        //    houseToEdit.Price = houseEditValues.Price;
+        //    houseToEdit.Area = houseEditValues.Area;
+        //    return Ok(houseToEdit);
 
 
-        }
+        //}
 
-    }
-    public class House
-    {
-        public string Name { get; set; }
-        public string Area { get; set; }
-        public int Price { get; set; }
     }
 }
