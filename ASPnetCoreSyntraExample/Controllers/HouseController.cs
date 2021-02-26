@@ -1,4 +1,5 @@
-﻿using ASPnetCoreSyntraExample.Models;
+﻿using ASPnetCoreSyntraExample.Db;
+using ASPnetCoreSyntraExample.Models;
 using ASPnetCoreSyntraExample.Services;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -41,33 +42,21 @@ namespace ASPnetCoreSyntraExample.Controllers
             _houseService.AddHouse(newHouse);
             return Ok();
         }
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        //[HttpDelete]
-        //public ActionResult DeleteHouse(string houseName)
-        //{
-        //    var houseToDelete = houses.First(x => x.Name == houseName);
-        //    houses.Remove(houseToDelete);
-        //    return Ok();
-        //}
+        [HttpDelete]
+        public ActionResult DeleteHouseById(int houseId)
+        {
+            _houseService.DeleteHouseById(houseId);
+            return Ok();
+        }
 
-        //[HttpPut]
-        //public ActionResult<House> UpdateHouseByName(string nameOfHouseToEdit, House houseEditValues)
-        //{
-        //    var houseToEdit = houses.First(x => x.Name == nameOfHouseToEdit);
-        //    houseToEdit.Price = houseEditValues.Price;
-        //    houseToEdit.Area = houseEditValues.Area;
-        //    return Ok(houseToEdit);
+        [HttpPut]
+        public ActionResult<House> UpdateHouseById(int houseIdToEdit, House houseEditValues)
+        {
+            var updatedHouse = _houseService.UpDateHouseById(houseIdToEdit, houseEditValues);
+            return Ok(updatedHouse);
 
 
-        //}
+        }
 
     }
 }

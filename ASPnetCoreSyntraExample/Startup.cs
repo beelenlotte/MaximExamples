@@ -33,7 +33,7 @@ namespace ASPnetCoreSyntraExample
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "ASPnetCoreSyntraExample", Version = "v1" });
             });
-            services.AddSingleton<IHouseService, HouseService>();
+            services.AddSingleton<IHouseService, DbHouseService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

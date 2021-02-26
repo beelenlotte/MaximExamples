@@ -34,13 +34,13 @@ namespace ASPnetCoreSyntraExample.Services
         {
             houses.Add(house);
         }
-    }
-
-    public interface IHouseService
-    {
-        House GetHouse(string houseName);
-
-        List<House> GetHouses();
-        void AddHouse(House house);
+        public void DeleteHouseById(int houseId)
+        {
+            throw new NotImplementedException();
+        }
+        public House UpDateHouseById(int houseIdToEdit, House houseEditValues)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
