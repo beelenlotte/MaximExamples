@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace ASPnetCoreSyntraExample.Db
 {
-    public class HouseDbContext : DbContext
+    public class GodDbContext : DbContext
     {
         public DbSet<House> Houses { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<Category> Categories { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=houses.db");
+            => options.UseSqlite("Data Source=goddatabaseisbad.db");
     }
 }

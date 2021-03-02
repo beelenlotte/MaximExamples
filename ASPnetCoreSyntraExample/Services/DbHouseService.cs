@@ -11,7 +11,7 @@ namespace ASPnetCoreSyntraExample.Services
     {
         public void AddHouse(House house)
         {
-            using (var db = new HouseDbContext())
+            using (var db = new GodDbContext())
             {
                 db.Houses.Add(house);
                 db.SaveChanges();
@@ -19,7 +19,7 @@ namespace ASPnetCoreSyntraExample.Services
         }
         public House GetHouse(string houseName)
         {
-            using (var db = new HouseDbContext())
+            using (var db = new GodDbContext())
             {
                 var house = db.Houses.FirstOrDefault(house => house.Name == houseName);
                 return house;
@@ -28,16 +28,15 @@ namespace ASPnetCoreSyntraExample.Services
 
         public List<House> GetHouses()
         {
-            using (var db = new HouseDbContext())
+            using (var db = new GodDbContext())
             {
                 return db.Houses.ToList();
             }
         }
         public void DeleteHouseById(int houseId)
         {
-            using (var db = new HouseDbContext())
+            using (var db = new GodDbContext())
             {
-                //var houseToDelete = db.Houses.Find(houseId);
                 var houseToDelete = db.Houses.FirstOrDefault(house => house.Id == houseId);
                 db.Houses.Remove(houseToDelete);
                 db.SaveChanges();
@@ -46,7 +45,7 @@ namespace ASPnetCoreSyntraExample.Services
 
         public House UpDateHouseById(int houseIdToEdit, House houseEditValues)
         {
-            using (var db = new HouseDbContext())
+            using (var db = new GodDbContext())
             {
                 var houseToEdit = db.Houses.First(house => house.Id == houseIdToEdit);
                 houseToEdit.Price = houseEditValues.Price;
