@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "MsgSbDBqF5u/IFoZ9L4v+bRP1f0nabjB4eNlR0qizAmpYCwDgEDFZVXT4dThpLGqJprHVOlEdX+SFvMaE0NY9w==",
+  "success": true,
+  "projectFilePath": "E:\\code\\MaximExamples\\Example2\\Example2\\Example2.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Maxim-Local\\.nuget\\packages\\microsoft.extensions.apidescription.server\\3.0.0\\microsoft.extensions.apidescription.server.3.0.0.nupkg.sha512",
+    "C:\\Users\\Maxim-Local\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\Maxim-Local\\.nuget\\packages\\swashbuckle.aspnetcore\\5.6.3\\swashbuckle.aspnetcore.5.6.3.nupkg.sha512",
+    "C:\\Users\\Maxim-Local\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\5.6.3\\swashbuckle.aspnetcore.swagger.5.6.3.nupkg.sha512",
+    "C:\\Users\\Maxim-Local\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\5.6.3\\swashbuckle.aspnetcore.swaggergen.5.6.3.nupkg.sha512",
+    "C:\\Users\\Maxim-Local\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\5.6.3\\swashbuckle.aspnetcore.swaggerui.5.6.3.nupkg.sha512"
+  ],
+  "logs": []
+}
