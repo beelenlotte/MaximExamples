@@ -1,7 +1,9 @@
 ﻿using ASPnetCoreSyntraExample.Db;
+using ASPnetCoreSyntraExample.DTO;
 using ASPnetCoreSyntraExample.Models;
 using ASPnetCoreSyntraExample.Services;
 using ASPnetCoreSyntraExample.Services.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -16,10 +18,12 @@ namespace ASPnetCoreSyntraExample.Controllers
     public partial class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
+        private readonly IMapper _mapper;
 
-        public CategoryController(ICategoryService categoryService)
+        public CategoryController(ICategoryService categoryService, IMapper mapper)
         {
-            this._categoryService = categoryService;
+            _categoryService = categoryService;
+            _mapper = mapper;
         }
         [HttpPost]
         public ActionResult<Category> CreateNewCategory(CreateCategoryDTO createCategoryDTO)
@@ -50,25 +54,7 @@ namespace ASPnetCoreSyntraExample.Controllers
         public ActionResult<List<ResponseCategoryWithProductsDTO>> GetAllCategoriesWithProducts()
         {
             var categories = _categoryService.GetCategoriesWithProducts();
-            var listOfResponseCategoryDTO = new List<ResponseCategoryWithProductsDTO>();
-            foreach (Category cat in categories)
-            {
-                var responseCategoryDTO = new ResponseCategoryWithProductsDTO();
-                responseCategoryDTO.Id = cat.Id;
-                responseCategoryDTO.Name = cat.Name;
-                responseCategoryDTO.Products = new List<ResponseProductDTO>();
-
-                foreach(Product product in cat.Products)
-                {
-                    var responseProductDTO = new ResponseProductDTO();
-                    responseProductDTO.Id = product.Id;
-                    responseProductDTO.Name = product.Name;
-                    responseProductDTO.Price = product.Price;
-                    responseCategoryDTO.Products.Add(responseProductDTO);
-                }
-                listOfResponseCategoryDTO.Add(responseCategoryDTO);
-            }
-
+            var listOfResponseCategoryDTO = _mapper.Map<List<ResponseCategoryWithProductsDTO>>(categories);
             return Ok(listOfResponseCategoryDTO);
         }
         [HttpGet("manywithproductsthatcrashes")]
@@ -77,7 +63,27 @@ namespace ASPnetCoreSyntraExample.Controllers
             var categories = _categoryService.GetCategoriesWithProducts();
             return Ok(categories);
         }
+        [HttpGet("GetCategoriesWithTotalPrice")]
+        public ActionResult<List<CategoriesWithTotalPriceDTO>> GetCategoriesWithTotalPrice()
+        {
+            var allcatswithproducts = _categoryService.GetCategoriesWithProducts();
+            var returnList = new List<CategoriesWithTotalPriceDTO>();
+            foreach (var cat in allcatswithproducts)
+            {
+                var catwithTotalPrice = new CategoriesWithTotalPriceDTO();
+                catwithTotalPrice.CategoryName = cat.Name;
+                int totalPriceOfCat = 0;
+                foreach (var prod in cat.Products)
+                {
+                    totalPriceOfCat = totalPriceOfCat + prod.Price;
+                }
+                catwithTotalPrice.CategoryTotalPrice = totalPriceOfCat;
+                returnList.Add(catwithTotalPrice);
+            }
 
+
+            return Ok(returnList);
+        }
         //[HttpGet("one")]
         //public ActionResult<House> GetHouse(string houseName)
         //{

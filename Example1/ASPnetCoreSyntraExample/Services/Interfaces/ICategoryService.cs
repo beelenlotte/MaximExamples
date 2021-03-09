@@ -14,5 +14,6 @@ namespace ASPnetCoreSyntraExample.Services.Interfaces
 
         List<Category> GetCategoriesWithProducts();
 
+
     }
 }

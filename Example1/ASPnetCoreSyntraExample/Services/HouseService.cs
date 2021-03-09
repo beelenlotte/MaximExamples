@@ -8,7 +8,7 @@ namespace ASPnetCoreSyntraExample.Services
 {
     public class HouseService : IHouseService
     {
-        List<House> houses = new List<House>();
+        public List<House> houses = new List<House>();
 
         public HouseService()
         {
@@ -32,7 +32,8 @@ namespace ASPnetCoreSyntraExample.Services
         }
         public void AddHouse(House house)
         {
-            houses.Add(house);
+            Console.WriteLine("Add the house yes yes");
+            //houses.Add(house);
         }
         public void DeleteHouseById(int houseId)
         {

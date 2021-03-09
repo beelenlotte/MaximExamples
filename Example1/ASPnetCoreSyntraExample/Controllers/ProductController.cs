@@ -1,6 +1,8 @@
 ﻿using ASPnetCoreSyntraExample.Db;
+using ASPnetCoreSyntraExample.DTO;
 using ASPnetCoreSyntraExample.Models;
 using ASPnetCoreSyntraExample.Services;
+using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -15,10 +17,14 @@ namespace ASPnetCoreSyntraExample.Controllers
     public partial class ProductController : ControllerBase
     {
         private readonly IProductService _ProductService;
-        public ProductController(IProductService ProductService)
+        private readonly IMapper _mapper;
+        public ProductController(IMapper mapper, IProductService ProductService)
         {
+            _mapper = mapper;
             _ProductService = ProductService;
         }
+
+
         [HttpGet("many")]
         public ActionResult<List<Product>> GetAllProducts()
         {
@@ -39,12 +45,8 @@ namespace ASPnetCoreSyntraExample.Controllers
         [HttpPost]
         public ActionResult CreateNewProduct(CreateProductDTO createProductDTO)
         {
-            var productToInsertInDB = new Product();
-            productToInsertInDB.Name = createProductDTO.Name;
-            productToInsertInDB.HiddenCode = createProductDTO.HiddenCode;
-            productToInsertInDB.Price = createProductDTO.Price;
-            productToInsertInDB.CategoryId = createProductDTO.CategoryId;
-            _ProductService.AddProduct(productToInsertInDB);
+            var product = _mapper.Map<Product>(createProductDTO);
+            _ProductService.AddProduct(product);
             return Ok();
         }
 
@@ -60,6 +62,7 @@ namespace ASPnetCoreSyntraExample.Controllers
         [HttpPut]
         public ActionResult<Product> UpdateProductById(int productIdToEdit, Product productEditValues)
         {
+
             var updatedProduct = _ProductService.UpDateProductById(productIdToEdit, productEditValues);
             return Ok(updatedProduct);
 
