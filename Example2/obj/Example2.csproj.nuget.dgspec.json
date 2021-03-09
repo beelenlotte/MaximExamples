@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "E:\\code\\MaximExamples\\Example2\\Example2\\Example2.csproj": {}
+    "E:\\code\\MaximExamples\\Example2\\Example2.csproj": {}
   },
   "projects": {
-    "E:\\code\\MaximExamples\\Example2\\Example2\\Example2.csproj": {
+    "E:\\code\\MaximExamples\\Example2\\Example2.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "E:\\code\\MaximExamples\\Example2\\Example2\\Example2.csproj",
+        "projectUniqueName": "E:\\code\\MaximExamples\\Example2\\Example2.csproj",
         "projectName": "Example2",
-        "projectPath": "E:\\code\\MaximExamples\\Example2\\Example2\\Example2.csproj",
+        "projectPath": "E:\\code\\MaximExamples\\Example2\\Example2.csproj",
         "packagesPath": "C:\\Users\\Maxim-Local\\.nuget\\packages\\",
-        "outputPath": "E:\\code\\MaximExamples\\Example2\\Example2\\obj\\",
+        "outputPath": "E:\\code\\MaximExamples\\Example2\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
@@ -45,6 +45,20 @@
         "net5.0": {
           "targetAlias": "net5.0",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[8.1.1, )"
+            },
+            "Microsoft.EntityFrameworkCore.Design": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[5.0.3, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[5.6.3, )"

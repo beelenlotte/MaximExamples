@@ -12,5 +12,6 @@ namespace Example2.DBModels
         public string HouseNumber { get; set; }
         public string Postal { get; set; }
         public string Town { get; set; }
+        public List<Person> Persons { get; set; }
     }
 }

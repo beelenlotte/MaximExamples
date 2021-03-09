@@ -1,3 +1,5 @@
+using Example2.Services;
+using Example2.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -26,12 +28,13 @@ namespace Example2
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-
+            services.AddAutoMapper(typeof(Startup));
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Example2", Version = "v1" });
             });
+            services.AddSingleton<IPersonService, PersonService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
